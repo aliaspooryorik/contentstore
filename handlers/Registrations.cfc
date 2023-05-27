@@ -28,7 +28,7 @@ component {
 
 		if ( result.hasErrors() ) {
 			flash.put( "registration_form_errors", result.getAllErrorsAsStruct() );
-			redirectBack();
+			back();
 			return;
 		}
 

@@ -20,7 +20,7 @@ component {
 
 		if ( result.hasErrors() ) {
 			flash.put( "login_form_errors", result.getAllErrorsAsStruct() );
-			redirectBack();
+			back();
 			return;
 		}
 
@@ -29,7 +29,7 @@ component {
 			relocate( uri = flash.get( "_securedUrl", "/" ) );
 		} catch ( InvalidCredentials e ) {
 			flash.put( "login_form_errors", { "login" : "Invalid Credentials" } );
-			redirectBack();
+			back();
 		}
 	}
 
