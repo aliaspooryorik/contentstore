@@ -14,6 +14,10 @@ component extends="quick.models.BaseEntity" accessors="true" table="tblcontents"
         return variables._wirebox.getInstance( "UUIDKeyType@quick" );
     }
 
+    public boolean function isActive() {
+        return variables.keyExists( "active" ) && variables.active;
+    }
+
 	public User function retrieveContentBySlug( required string slug ){
 		return newEntity().where( "slug", arguments.slug ).firstOrFail();
 	}
