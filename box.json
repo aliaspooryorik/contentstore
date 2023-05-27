@@ -1,0 +1,58 @@
+{
+    "name":"Quick with Auth Template",
+    "version":"5.0.2",
+    "author":"You",
+    "location":"elpete/quick-with-auth#v5.0.2",
+    "slug":"cbtemplate-quick-with-auth",
+    "createPackageDirectory":false,
+    "type":"mvc",
+    "keywords":"",
+    "homepage":"",
+    "documentation":"",
+    "repository":{
+        "type":"",
+        "url":""
+    },
+    "bugs":"",
+    "shortDescription":"",
+    "contributors":[],
+    "ignore":[],
+    "devDependencies":{
+        "testbox":"^5.0.0",
+        "commandbox-dotenv":"*",
+        "commandbox-migrations":"*",
+        "commandbox-cfconfig":"*",
+        "commandbox-cfformat":"*",
+        "cfmigrations":"^4.0.0"
+    },
+    "installPaths":{
+        "coldbox":"coldbox/",
+        "testbox":"testbox/",
+        "quick":"modules/quick/",
+        "cbauth":"modules/cbauth/",
+        "cbguard":"modules/cbguard/",
+        "BCrypt":"modules/BCrypt/",
+        "cbvalidation":"modules/cbvalidation/",
+        "redirectBack":"modules/redirectBack/",
+        "verify-csrf-interceptor":"modules/verify-csrf-interceptor/",
+        "cfmigrations":"modules/cfmigrations/",
+        "cbsecurity":"modules/cbsecurity/"
+    },
+    "dependencies":{
+        "coldbox":"^6.0.0",
+        "quick":"^6.0.0",
+        "cbsecurity":"^3.3.0",
+        "BCrypt":"^3.0.0",
+        "cbvalidation":"^4.2.0",
+        "redirectBack":"^2.0.0"
+    },
+    "scripts":{
+        "preVersion":"run-script format:check",
+        "postVersion":"package set location='elpete/quick-with-auth#v`package version`'",
+        "onRelease":"publish",
+        "postPublish":"!git push --follow-tags",
+        "postInstall":"pathExists .env || cp .env.example .env",
+        "format":"cfformat run config/**/*.cfc,handlers/**/*.cfc,includes/**/*.cfc,interceptors/**/*.cfc,layouts/**/*.cfc,models/**/*.cfc,modules_app/**/*.cfc,resources/**/*.cfc,tests/specs/**/*.cfc,views/**/*.cfc,*.cfc --overwrite",
+        "format:check":"cfformat check config/**/*.cfc,handlers/**/*.cfc,includes/**/*.cfc,interceptors/**/*.cfc,layouts/**/*.cfc,models/**/*.cfc,modules_app/**/*.cfc,resources/**/*.cfc,tests/specs/**/*.cfc,views/**/*.cfc,*.cfc"
+    }
+}
