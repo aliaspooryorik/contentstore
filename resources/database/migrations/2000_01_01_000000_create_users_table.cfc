@@ -1,15 +1,16 @@
 component {
 
 	function up( schema, query ){
-		schema.create( "users", function(table) {
-			table.increments( "id" );
+		schema.create( "tblusers", function( table ) {
+			table.increments( "user_id" );
 			table.string( "email" ).unique();
 			table.string( "password" );
+			table.timestamps();
 		} );
 	}
 
 	function down( schema, query ){
-		schema.drop( "users" );
+		schema.drop( "tblusers" );
 	}
 
 }

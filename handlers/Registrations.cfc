@@ -19,7 +19,7 @@ component {
 				"email" : {
 					"required" : true,
 					"type" : "email",
-					"uniqueInDatabase" : { "table" : "users", "column" : "email" }
+					"uniqueInDatabase" : { "table" : "tblusers", "column" : "email" }
 				},
 				"password" : { "required" : true },
 				"passwordConfirmation" : { "required" : true, "sameAs" : "password" }

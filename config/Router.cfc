@@ -10,6 +10,14 @@ component {
 
 		resources( resource = "registrations", only = [ "new", "create" ] );
 
+
+		get( "/contents/new", "Contents.new" );
+		get( "/contents/:contentId", "Contents.show" );
+		route( "/contents" ).withHandler( "Contents" ).toAction( { 
+			"GET"  : "index", 
+			"POST" : "create" 
+		} );
+
 		// Conventions based routing
 		route( ":handler/:action?" ).end();
 	}

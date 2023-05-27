@@ -23,7 +23,8 @@
         "commandbox-migrations":"*",
         "commandbox-cfconfig":"*",
         "commandbox-cfformat":"*",
-        "cfmigrations":"^4.0.0"
+        "cfmigrations":"^4.0.0",
+        "cbdebugger":"^4.1.0"
     },
     "installPaths":{
         "coldbox":"coldbox/",
@@ -36,7 +37,8 @@
         "redirectBack":"modules/redirectBack/",
         "verify-csrf-interceptor":"modules/verify-csrf-interceptor/",
         "cfmigrations":"modules/cfmigrations/",
-        "cbsecurity":"modules/cbsecurity/"
+        "cbsecurity":"modules/cbsecurity/",
+        "cbdebugger":"modules/cbdebugger/"
     },
     "dependencies":{
         "coldbox":"^7.0.0+7",

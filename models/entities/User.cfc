@@ -1,10 +1,10 @@
-component extends="quick.models.BaseEntity" accessors="true" {
+component extends="quick.models.BaseEntity" accessors="true" table="tblusers" {
 
 	property name="bcrypt" inject="@BCrypt" persistent="false";
 
-	property name="id";
+	property name="id" column="user_id";
 	property name="email";
-	property name="password";
+	property name="password" setter=false;
 
 	this.memento = { "defaultExcludes" : [ "id" ], "neverInclude" : [ "password" ] };
 
