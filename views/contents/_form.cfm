@@ -19,6 +19,7 @@
         <input type="checkbox" class="form-control" name="active" id="active" <cfif prc.Content.isActive()>checked</cfif>>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
+    <input type="hidden" name="csrf" value="#csrfToken()#">
 #html.endForm()#
 
 </cfoutput>

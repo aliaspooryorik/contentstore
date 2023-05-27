@@ -6,7 +6,7 @@
         <p class="alert alert-danger">#prc.errors.login#</p>
     </cfif>
     <form method="POST" action="#event.buildLink( "login" )#">
-        <input type="hidden" name="_token" value="#csrfGenerateToken()#" />
+        <input type="hidden" name="csrf" value="#csrfToken()#">
         <div class="form-group">
             <label for="email">Email Address:</label>
             <input name="email" type="email" class="form-control" id="email" />

@@ -1,5 +1,11 @@
 component extends="coldbox.system.EventHandler" secured {
 
+	this.allowedMethods = {
+        create : "POST",
+        delete : "DELETE",
+        update : "PUT"
+    };
+
 	function index( event, rc, prc ){
 		prc.contents = getInstance( "Content" ).get();
 	}
