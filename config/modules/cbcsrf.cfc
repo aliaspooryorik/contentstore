@@ -1,12 +1,14 @@
 component {
 
     function configure() {
-        return {};
+        return {
+            enableAutoVerifier: true,
+            enableAuthTokenRotator: true
+        };
     }
 
     function development( struct moduleSettings ) {
-        moduleSettings.enableAutoVerifier = true;
-        moduleSettings.enableAuthTokenRotator = true;
+        moduleSettings.verifyExcludes.append( "cbdebugger" );
     }
 
 }

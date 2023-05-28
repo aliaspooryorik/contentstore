@@ -24,7 +24,8 @@
         "commandbox-cfconfig":"*",
         "commandbox-cfformat":"*",
         "cfmigrations":"^4.0.0",
-        "cbdebugger":"^4.1.0"
+        "cbdebugger":"^4.1.0",
+        "route-visualizer":"^2.0.0+6"
     },
     "installPaths":{
         "coldbox":"coldbox/",
@@ -46,8 +47,7 @@
         "cbsecurity":"^3.3.0",
         "BCrypt":"^3.0.0",
         "cbvalidation":"^4.2.0",
-        "cbcsrf":"^3.1.0+16",
-        "route-visualizer":"^2.0.0+6"
+        "cbcsrf":"^3.1.0+16"
     },
     "scripts":{
         "preVersion":"run-script format:check",
