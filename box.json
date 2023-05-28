@@ -37,7 +37,8 @@
         "cfmigrations":"modules/cfmigrations/",
         "cbsecurity":"modules/cbsecurity/",
         "cbdebugger":"modules/cbdebugger/",
-        "cbcsrf":"modules/cbcsrf/"
+        "cbcsrf":"modules/cbcsrf/",
+        "route-visualizer":"modules/route-visualizer/"
     },
     "dependencies":{
         "coldbox":"^7.0.0+7",
@@ -45,7 +46,8 @@
         "cbsecurity":"^3.3.0",
         "BCrypt":"^3.0.0",
         "cbvalidation":"^4.2.0",
-        "cbcsrf":"^3.1.0+16"
+        "cbcsrf":"^3.1.0+16",
+        "route-visualizer":"^2.0.0+6"
     },
     "scripts":{
         "preVersion":"run-script format:check",
