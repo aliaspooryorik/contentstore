@@ -1,7 +1,7 @@
 <cfoutput>
 
-
-#html.startForm( method=args.method, action=args.action )#
+<form method="POST" action="#args.action#">
+    <input type="hidden" name="_method" value="#args.method#">
     <div class="form-group">
         <label for="title">Title</label>
         <input type="text" class="form-control" name="title" id="title" value="#prc.Content.getTitle()#" required>
@@ -20,6 +20,6 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
     <input type="hidden" name="csrf" value="#csrfToken()#">
-#html.endForm()#
+</form>
 
 </cfoutput>

@@ -1,8 +1,9 @@
 <cfoutput>
-#html.startForm( method="DELETE", action=event.buildLink( "contents.#prc.Content.getID()#" ) )#
-    <button type="submit" class="btn">Delete</button>
+<form method="POST" action="#event.buildLink( "contents.#prc.Content.getID()#" )#">
+    <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="csrf" value="#csrfToken()#">
-#html.endForm()#
+    <button type="submit" class="btn">Delete</button>
+</form>
 
 <h1>#prc.Content.getTitle()#</h1>
 <pre>#prc.Content.getSlug()#</pre>
