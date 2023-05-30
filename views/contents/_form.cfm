@@ -6,10 +6,7 @@
         <label for="title">Title</label>
         <input type="text" class="form-control" name="title" id="title" value="#prc.Content.getTitle()#" required>
     </div>
-    <div class="form-group">
-        <label for="slug">Slug</label>
-        <input type="text" class="form-control" name="slug" id="slug" value="#prc.Content.getSlug()#" required>
-    </div>
+    #wire( "slug" )#
     <div class="form-group">
         <label for="content">Content</label>
         <textarea type="text" class="form-control" name="content" id="content" rows="3" required>#prc.Content.getContent()#</textarea>
