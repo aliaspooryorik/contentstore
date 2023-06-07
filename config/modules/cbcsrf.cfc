@@ -8,7 +8,7 @@ component {
     }
 
     function development( struct moduleSettings ) {
-        moduleSettings.verifyExcludes.append( "cbdebugger" );
+        moduleSettings.verifyExcludes.append( "^cbdebugger:" );
     }
 
 }

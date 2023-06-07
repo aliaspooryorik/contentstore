@@ -3,15 +3,12 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to Coldbox!</title>
-	<meta name="description" content="ColdBox Application Template">
-    <meta name="author" content="Ortus Solutions, Corp">
+	<title>Welcome!</title>
 	<!---Base URL --->
 	<base href="#event.getHTMLBaseURL()#" />
 	<!---css --->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-	#wireStyles()#
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50" style="padding-top: 60px">
 	<!---Top NavBar --->
@@ -27,10 +24,12 @@
             <ul class="nav navbar-nav ml-auto">
                 <cfif auth().guest()>
                     <li class="nav-item">
-                        <a href="#event.buildLink( "registrations.new" )#" class="nav-link">Register</a></li>
-                    <li class="nav-item">
                         <a href="#event.buildLink( "login" )#" class="nav-link">Log In</a></li>
                 <cfelse>
+					<li class="nav-item">
+                        <a href="#event.buildLink( "contents" )#" class="nav-link">Contents</a></li>
+					<li class="nav-item">
+                        <a href="#event.buildLink( "registrations.new" )#" class="nav-link">Add user</a></li>
                     <li class="nav-item">
                         <a href="#event.buildLink( "logout" )#" class="nav-link">Log Out</a></li>
                 </cfif>
@@ -46,14 +45,6 @@
 			<p class="float-right">
 				<a href="##"><i class="fas fa-arrow-up"></i> Back to top</a>
 			</p>
-			<p>
-				<a href="https://www.coldbox.org">ColdBox Platform</a> is a copyright-trademark software by
-				<a href="https://www.ortussolutions.com">Ortus Solutions, Corp</a>
-			</p>
-			<p>
-				Design thanks to
-				<a href="https://getbootstrap.com/">Twitter Bootstrap</a>
-			</p>
 		</div>
 	</footer>
 
@@ -61,7 +52,6 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-	#wireScripts()#
 	<script>
 	$(function() {
 		// activate all drop downs

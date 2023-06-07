@@ -32,7 +32,6 @@
         "testbox":"testbox/",
         "quick":"modules/quick/",
         "cbauth":"modules/cbauth/",
-        "cbguard":"modules/cbguard/",
         "BCrypt":"modules/BCrypt/",
         "cbvalidation":"modules/cbvalidation/",
         "cfmigrations":"modules/cfmigrations/",
@@ -46,8 +45,9 @@
         "quick":"^6.0.0",
         "cbsecurity":"^3.3.0",
         "BCrypt":"^3.0.0",
-        "cbvalidation":"^4.2.0",
-        "cbcsrf":"^3.1.0+16"
+        "cbvalidation":"^4.3.0+24",
+        "cbcsrf":"^3.1.0+16",
+        "cbauth":"^6.0.1"
     },
     "scripts":{
         "preVersion":"run-script format:check",

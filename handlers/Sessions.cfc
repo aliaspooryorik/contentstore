@@ -1,8 +1,13 @@
-component {
+/**
+ * I handle login
+ **/
+component extends="coldbox.system.EventHandler" {
 
-	property name="auth" inject="AuthenticationService@cbauth";
 	property name="flash" inject="coldbox:flash";
 
+	/**
+	 * login form
+	 **/
 	function new( event, rc, prc ){
 		param rc._securedUrl = flash.get( "_securedUrl", "/" );
 		flash.put( "_securedUrl", rc._securedUrl );
@@ -10,7 +15,10 @@ component {
 		event.setView( "sessions/new" );
 	}
 
-	function create( event, rc, prc ){
+	/**
+	 * authenticate login
+	 **/
+	function create( event, rc, prc ) {
 		flash.keep( "_securedUrl" );
 
 		var result = validateModel(
@@ -25,7 +33,7 @@ component {
 		}
 
 		try{
-			auth.authenticate( rc.email, rc.password );
+			auth().authenticate( rc.email, rc.password );
 			relocate( uri = flash.get( "_securedUrl", "/" ) );
 		} catch ( InvalidCredentials e ) {
 			flash.put( "login_form_errors", { "login" : "Invalid Credentials" } );
@@ -33,8 +41,11 @@ component {
 		}
 	}
 
+	/**
+	 * logout
+	 **/
 	function delete( event, rc, prc ){
-		auth.logout();
+		auth().logout();
 		relocate( uri = "/" );
 	}
 

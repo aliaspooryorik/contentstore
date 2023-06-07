@@ -1,8 +1,10 @@
-component {
+component extends="coldbox.system.EventHandler" secured {
 
-	property name="auth" inject="AuthenticationService@cbauth";
 	property name="flash" inject="coldbox:flash";
 
+	/**
+	 * new user form
+	 **/
 	function new( event, rc, prc ){
 		param rc._securedUrl = flash.get( "_securedUrl", "/" );
 		flash.put( "_securedUrl", rc._securedUrl );
@@ -10,6 +12,9 @@ component {
 		event.setView( "registrations/new" );
 	}
 
+	/**
+	 * process new user form
+	 **/
 	function create( event, rc, prc ){
 		flash.keep( "_securedUrl" );
 
@@ -33,8 +38,6 @@ component {
 		}
 
 		var user = getInstance( "User" ).create( { "email" : rc.email, "password" : rc.password } );
-
-		auth.login( user );
 
 		relocate( uri = flash.get( "_securedUrl", "/" ) );
 	}

@@ -1,6 +1,5 @@
 <cfoutput>
     <h3>Log In</h3>
-    <small>or <a href="#event.buildLink( "registrations.new" )#">register for an account</a></small>
     <hr />
     <cfif prc.errors.keyExists( "login" )>
         <p class="alert alert-danger">#prc.errors.login#</p>
