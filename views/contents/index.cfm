@@ -3,6 +3,8 @@
 
 <a href="#event.buildLink( "contents.new" )#">New content</a>
 
+#cbMessageBox().renderIt()#
+
 <cfif prc.Contents.isEmpty()>
 
 <cfelse>
