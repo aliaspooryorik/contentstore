@@ -1,27 +1,30 @@
 component extends="coldbox.system.EventHandler" secured {
 
 	/**
-	 * list contents
+	 * list
 	 */
 	function index( event, rc, prc ){
 		prc.contents = getInstance( "Content" ).get();
+		event.setView( "contents/index" );
 	}
 
 	/**
-	 * load existing content into form to edit
+	 * edit form
 	 */
 	function edit( event, rc, prc ) {
+		event.setView( "contents/edit" );
 	}
 
 	/**
-	 * new content form
+	 * new form
 	 */
 	function new( event, rc, prc ){
 		prc.content = getInstance( "Content" );
+		event.setView( "contents/new" );
 	}
 
 	/**
-	 * create content
+	 * do create
 	 */
 	function create( event, rc, prc ) allowedMethods="POST" {
 		var content = getInstance( "Content" ).create( {
@@ -34,11 +37,12 @@ component extends="coldbox.system.EventHandler" secured {
 	}
 
 	function show( event, rc, prc ){
+		event.setView( "contents/show" );
 	}
 
 
 	/**
-	 * delete content
+	 * delete
 	 */
 	function delete( event, rc, prc ) allowedMethods="DELETE" {
 		prc.content.delete();
@@ -46,10 +50,10 @@ component extends="coldbox.system.EventHandler" secured {
 	}
 
 	/**
-	 * update existing content
+	 * do update
 	 */
 	function update( event, rc, prc ) allowedMethods="PUT" {
-		prc.content.update( {
+		prc.content.populate( {
 			slug : rc.slug,
 			title : rc.title,
 			content : rc.content,
@@ -58,27 +62,10 @@ component extends="coldbox.system.EventHandler" secured {
 		relocate( "contents" );
 	}
 
-
 	/**
-	 * Action used when the framework detects and Invalid HTTP method for the action
-	 *
-	 * @event          The request context
-	 * @rc             The rc reference
-	 * @prc            The prc reference
-	 * @faultAction    The action that was secured
-	 * @eventArguments The original event arguments
+	 * interception handlers
 	 */
-	function onInvalidHTTPMethod( event, rc, prc, faultAction, eventArguments ){
-		// Log it
-		log.warn(
-			"InvalidHTTPMethod Execution of (#arguments.faultAction#): #arguments.event.getHTTPMethod()#",
-			getHTTPRequestData( false )
-		);
-		relocate( "contents" );
-	}
-
-
-	function aroundHandler( event, rc, prc, targetAction, eventArguments ){
+	function preHandler( event, rc, prc ){
 		if ( structKeyExists( rc, "contentId" ) ) {
 			try {
 				prc.content = getInstance( "Content" ).findOrFail( rc.contentId );
@@ -87,7 +74,6 @@ component extends="coldbox.system.EventHandler" secured {
 				relocate( "contents" );
 			}
 		}
-		return arguments.targetAction( argumentCollection=arguments );
 	}
 
 }

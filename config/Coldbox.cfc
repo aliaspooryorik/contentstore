@@ -9,7 +9,7 @@ component {
 			eventName : "event",
 			// Development Settings
 			reinitPassword : "",
-			handlersIndexAutoReload : true,
+			handlersIndexAutoReload : false,
 			// Implicit Events
 			defaultEvent : "",
 			requestStartHandler : "Main.onRequestStart",
@@ -20,6 +20,7 @@ component {
 			sessionEndHandler : "",
 			missingTemplateHandler : "",
 			// Extension Points
+			implicitViews: false,
 			applicationHelper : "includes/helpers/ApplicationHelper.cfm",
 			viewsHelper : "",
 			modulesExternalLocation : [],
@@ -34,7 +35,7 @@ component {
 			invalidEventHandler : "",
 			customErrorTemplate : "",
 			// Application Aspects
-			handlerCaching : false,
+			handlerCaching : true,
 			eventCaching : false,
 			viewCaching : false,
 			// Will automatically do a mapDirectory() on your `models` for you.
@@ -144,6 +145,8 @@ component {
 	 * Development environment
 	 */
 	function development(){
+		coldbox.handlersIndexAutoReload = true;
+		coldbox.handlerCaching = false;
 		coldbox.customErrorTemplate = "/coldbox/system/exceptions/Whoops.cfm";
 	}
 
