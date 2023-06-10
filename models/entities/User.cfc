@@ -17,7 +17,7 @@ component extends="quick.models.BaseEntity" accessors="true" table="tblusers" {
 	}
 
 	public boolean function isValidCredentials( required string email, required string password ){
-		var user = newEntity().where( "email", arguments.email ).first();
+		var user = newEntity().where( "email", arguments.email ).where( "active", 1 ).first();
 		if ( isNull( user ) ) {
 			return false;
 		}
