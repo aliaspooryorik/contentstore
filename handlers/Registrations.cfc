@@ -1,6 +1,5 @@
 component extends="coldbox.system.EventHandler" secured {
 
-		
 	/**
 	 * list
 	 */
@@ -12,7 +11,7 @@ component extends="coldbox.system.EventHandler" secured {
 	/**
 	 * edit form
 	 */
-	function edit( event, rc, prc ) {
+	function edit( event, rc, prc ){
 	}
 
 	/**

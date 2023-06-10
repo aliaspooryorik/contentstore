@@ -1,8 +1,11 @@
 component {
 
 	function up( schema, query ){
-		schema.create( "tblcontents", function( table ) {
-			table.guid( "content_id" ).default( "'UUID()'" ).primaryKey();
+		schema.create( "tblcontents", function(table) {
+			table
+				.guid( "content_id" )
+				.default( "'UUID()'" )
+				.primaryKey();
 			table.string( "slug" ).unique();
 			table.string( "title" );
 			table.string( "content" );

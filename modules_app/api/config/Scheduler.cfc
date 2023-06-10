@@ -5,7 +5,6 @@
 component {
 
 	function configure(){
-
 		/* task( "photoNumbers" )
 			.call( () => {
 				var random = getInstance( "PhotoService" ).getRandom();
@@ -15,7 +14,6 @@ component {
 			.every( 15, "seconds" )
 			.delay( 60, "seconds" )
 			.onEnvironment( "development" ); */
-
 	}
 
 }

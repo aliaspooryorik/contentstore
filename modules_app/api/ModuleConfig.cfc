@@ -41,27 +41,27 @@
 component {
 
 	// Module Properties
-	this.title              = "api";
-	this.author             = "";
-	this.webURL             = "";
-	this.description        = "";
-	this.version            = "1.0.0";
+	this.title = "api";
+	this.author = "";
+	this.webURL = "";
+	this.description = "";
+	this.version = "1.0.0";
 	// If true, looks for views in the parent first, if not found, then in the module. Else vice-versa
-	this.viewParentLookup   = true;
+	this.viewParentLookup = true;
 	// If true, looks for layouts in the parent first, if not found, then in module. Else vice-versa
 	this.layoutParentLookup = true;
 	// Module Entry Point
-	this.entryPoint         = "api/v1";
+	this.entryPoint = "api/v1";
 	// Inherit Entry Point
-	this.inheritEntryPoint  = false;
+	this.inheritEntryPoint = false;
 	// Model Namespace
-	this.modelNamespace     = "api";
+	this.modelNamespace = "api";
 	// CF Mapping
-	this.cfmapping          = "";
+	this.cfmapping = "";
 	// Auto-map models
-	this.autoMapModels      = true;
+	this.autoMapModels = true;
 	// Module Dependencies
-	this.dependencies       =   [];
+	this.dependencies = [];
 
 	/**
 	 * Configure the module

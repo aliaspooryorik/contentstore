@@ -11,7 +11,7 @@ component extends="coldbox.system.EventHandler" secured {
 	/**
 	 * edit form
 	 */
-	function edit( event, rc, prc ) {
+	function edit( event, rc, prc ){
 		event.setView( "contents/edit" );
 	}
 
@@ -26,16 +26,14 @@ component extends="coldbox.system.EventHandler" secured {
 	/**
 	 * do create
 	 */
-	function create( event, rc, prc ) allowedMethods="POST" {
+	function create( event, rc, prc ) allowedMethods="POST"{
 		var content = getInstance( "Content" ).populate( {
 			slug : rc.slug,
 			title : rc.title,
 			content : rc.content,
 			active : rc.keyExists( "active" )
 		} );
-		var result = validateModel(
-			target = content
-		);
+		var result = validateModel( target = content );
 		if ( result.hasErrors() ) {
 			cbMessageBox().error( result.getAllErrors() );
 			back();
@@ -54,7 +52,7 @@ component extends="coldbox.system.EventHandler" secured {
 	/**
 	 * delete
 	 */
-	function delete( event, rc, prc ) allowedMethods="DELETE" {
+	function delete( event, rc, prc ) allowedMethods="DELETE"{
 		prc.content.delete();
 		cbMessageBox().success( "#prc.content.getTitle()# deleted" );
 		relocate( "contents" );
@@ -63,16 +61,14 @@ component extends="coldbox.system.EventHandler" secured {
 	/**
 	 * do update
 	 */
-	function update( event, rc, prc ) allowedMethods="PUT" {
+	function update( event, rc, prc ) allowedMethods="PUT"{
 		prc.content.populate( {
 			slug : rc.slug,
 			title : rc.title,
 			content : rc.content,
 			active : rc.keyExists( "active" )
 		} );
-		var result = validateModel(
-			target = prc.content
-		);
+		var result = validateModel( target = prc.content );
 		if ( result.hasErrors() ) {
 			cbMessageBox().error( result.getAllErrors() );
 			back();
@@ -88,7 +84,7 @@ component extends="coldbox.system.EventHandler" secured {
 	 */
 	function preHandler( event, rc, prc ){
 		if ( structKeyExists( rc, "contentId" ) ) {
-			try {
+			try{
 				prc.content = getInstance( "Content" ).findOrFail( rc.contentId );
 			} catch ( EntityNotFound err ) {
 				cbMessageBox().error( err.message );

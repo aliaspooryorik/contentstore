@@ -13,7 +13,7 @@ component extends="coldbox.system.EventHandler" {
 	/**
 	 * do login
 	 **/
-	function create( event, rc, prc ) {
+	function create( event, rc, prc ){
 		var result = validateModel(
 			target = rc,
 			constraints = { "email" : { "required" : true, "type" : "email" }, "password" : { "required" : true } }

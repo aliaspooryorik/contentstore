@@ -20,7 +20,7 @@ component {
 			sessionEndHandler : "",
 			missingTemplateHandler : "",
 			// Extension Points
-			implicitViews: false,
+			implicitViews : false,
 			applicationHelper : "includes/helpers/ApplicationHelper.cfm",
 			viewsHelper : "",
 			modulesExternalLocation : [],
