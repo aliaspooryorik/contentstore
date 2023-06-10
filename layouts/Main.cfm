@@ -21,18 +21,18 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<!---About --->
-            <ul class="nav navbar-nav ml-auto">
-                <cfif auth().guest()>
-                    <li class="nav-item">
-                        <a href="#event.buildLink( "login" )#" class="nav-link">Log In</a></li>
-                <cfelse>
+			<ul class="nav navbar-nav ml-auto">
+				<cfif auth().guest()>
 					<li class="nav-item">
-                        <a href="#event.buildLink( "contents" )#" class="nav-link">Contents</a></li>
+						<a href="#event.buildLink( "login" )#" class="nav-link">Log In</a></li>
+				<cfelse>
 					<li class="nav-item">
-                        <a href="#event.buildLink( "registrations.new" )#" class="nav-link">Add user</a></li>
-                    <li class="nav-item">
-                        <a href="#event.buildLink( "logout" )#" class="nav-link">Log Out</a></li>
-                </cfif>
+						<a href="#event.buildLink( "contents" )#" class="nav-link">Contents</a></li>
+					<li class="nav-item">
+						<a href="#event.buildLink( "users" )#" class="nav-link">Users</a></li>
+					<li class="nav-item">
+						<a href="#event.buildLink( "logout" )#" class="nav-link">Log Out</a></li>
+				</cfif>
 			</ul>
 		</div>
 	</nav> <!---end navbar --->

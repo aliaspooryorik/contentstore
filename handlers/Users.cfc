@@ -1,10 +1,10 @@
-component extends="coldbox.system.EventHandler" {
+component extends="coldbox.system.EventHandler" secured {
 
 	/**
 	 * list
 	 */
 	function index( event, rc, prc ){
-		prc.users = getInstance( "User" ).get();
+		prc.users = getInstance( "Content" ).get();
 		event.setView( "users/index" );
 	}
 
@@ -13,6 +13,7 @@ component extends="coldbox.system.EventHandler" {
 	 * edit form
 	 */
 	function edit( event, rc, prc ){
+		event.setView( "users/edit" );
 	}
 
 	/**
@@ -20,21 +21,21 @@ component extends="coldbox.system.EventHandler" {
 	 */
 	function new( event, rc, prc ){
 		prc.user = getInstance( "User" );
-		event.paramPrivateValue( "errors", {} );
+		event.paramValue( "validationerrors", {} );
 		event.setView( "users/new" );
 	}
 
-
 	/**
-	 * process new user form
+	 * do create
 	 **/
 	function create( event, rc, prc ){
-		prc.User = getInstance( "User" ).populate( { "email" : rc.email, "password" : rc.password } );
-		var result = validateModel( target = prc.User );
+		var user = getInstance( "User" ).populate( { "email" : rc.email, "password" : rc.password } );
+		user.setpasswordConfirmation( rc.passwordConfirmation ); // not persistent
+		var result = validateModel( target = user );
 
 		if ( result.hasErrors() ) {
-			flash.put( "registration_form_errors", result.getAllErrorsAsStruct() );
-			back();
+			cbMessageBox().error( "Please review the #result.getErrorCount()# errors" );
+			back( persistStruct = { validationerrors : result.getAllErrorsAsStruct() } );
 			return;
 		}
 
