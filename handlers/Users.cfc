@@ -29,8 +29,15 @@ component extends="coldbox.system.EventHandler" secured {
 	 * do create
 	 **/
 	function create( event, rc, prc ){
-		var user = getInstance( "User" ).populate( { "email" : rc.email, "password" : rc.password } );
-		user.setpasswordConfirmation( rc.passwordConfirmation ); // not persistent
+		var user = getInstance( "User" );
+		populate(
+			model   = user,
+			memento = {
+				"email"                : rc.email,
+				"password"             : rc.password,
+				"passwordConfirmation" : rc.passwordConfirmation
+			}
+		);
 		var result = validateModel( target = user );
 
 		if ( result.hasErrors() ) {
