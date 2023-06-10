@@ -1,13 +1,33 @@
 component extends="coldbox.system.EventHandler" secured {
 
-	property name="flash" inject="coldbox:flash";
+		
+	/**
+	 * list
+	 */
+	function index( event, rc, prc ){
+		prc.contents = getInstance( "Content" ).get();
+	}
+
+
+	/**
+	 * edit form
+	 */
+	function edit( event, rc, prc ) {
+	}
+
+	/**
+	 * new form
+	 */
+	function new( event, rc, prc ){
+		prc.user = getInstance( "User" );
+	}
+
+
 
 	/**
 	 * new user form
 	 **/
 	function new( event, rc, prc ){
-		param rc._securedUrl = flash.get( "_securedUrl", "/" );
-		flash.put( "_securedUrl", rc._securedUrl );
 		param prc.errors = flash.get( "registration_form_errors", {} );
 		event.setView( "registrations/new" );
 	}
@@ -16,8 +36,6 @@ component extends="coldbox.system.EventHandler" secured {
 	 * process new user form
 	 **/
 	function create( event, rc, prc ){
-		flash.keep( "_securedUrl" );
-
 		var result = validateModel(
 			target = rc,
 			constraints = {

@@ -27,12 +27,22 @@ component extends="coldbox.system.EventHandler" secured {
 	 * do create
 	 */
 	function create( event, rc, prc ) allowedMethods="POST" {
-		var content = getInstance( "Content" ).create( {
+		var content = getInstance( "Content" ).populate( {
 			slug : rc.slug,
 			title : rc.title,
 			content : rc.content,
 			active : rc.keyExists( "active" )
 		} );
+		var result = validateModel(
+			target = content
+		);
+		if ( result.hasErrors() ) {
+			cbMessageBox().error( result.getAllErrors() );
+			back();
+			return;
+		}
+		cbMessageBox().success( "#prc.content.getTitle()# saved" );
+		content.save();
 		relocate( "contents" );
 	}
 
@@ -46,6 +56,7 @@ component extends="coldbox.system.EventHandler" secured {
 	 */
 	function delete( event, rc, prc ) allowedMethods="DELETE" {
 		prc.content.delete();
+		cbMessageBox().success( "#prc.content.getTitle()# deleted" );
 		relocate( "contents" );
 	}
 
@@ -59,6 +70,16 @@ component extends="coldbox.system.EventHandler" secured {
 			content : rc.content,
 			active : rc.keyExists( "active" )
 		} );
+		var result = validateModel(
+			target = prc.content
+		);
+		if ( result.hasErrors() ) {
+			cbMessageBox().error( result.getAllErrors() );
+			back();
+			return;
+		}
+		cbMessageBox().success( "#prc.content.getTitle()# saved" );
+		prc.content.save();
 		relocate( "contents" );
 	}
 

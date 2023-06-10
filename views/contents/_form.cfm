@@ -1,4 +1,5 @@
 <cfoutput>
+#cbMessageBox().renderIt()#
 
 <form method="POST" action="#args.action#">
     <input type="hidden" name="_method" value="#args.method#">

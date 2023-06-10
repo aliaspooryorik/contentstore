@@ -9,6 +9,11 @@ component extends="quick.models.BaseEntity" accessors="true" table="tblcontents"
     property name="modifiedDate";
 
 	this.memento = { "neverInclude" : [ "" ] };
+    this.constraints = {
+        slug: { required: true, size: "3..255" },
+        title: { required: true, size: "2..255" },
+        content: { required: true }
+    };
 
     function keyType() {
         return variables._wirebox.getInstance( "UUIDKeyType@quick" );
