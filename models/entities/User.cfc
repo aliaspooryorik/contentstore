@@ -17,25 +17,18 @@ component
 	property name="id" column="user_id";
 	property name="email";
 	property name="password" setter=false;
+	property name="active" casts="BooleanCast@quick";
 
-	this.memento = {
-		"defaultExcludes" : [ "id" ],
-		"neverInclude"    : [ "password" ]
-	};
-	this.constraints = {
-		"email" : {
-			"required"         : true,
-			"type"             : "email",
-			"uniqueInDatabase" : { "table" : "tblusers", "column" : "email" }
-		},
-		"password"             : { "required" : true },
-		"passwordConfirmation" : { "required" : true, "sameAs" : "password" }
-	};
+	this.memento = { neverInclude : [ "password" ] };
 
 	public User function setPassword( required string password ){
 		return assignAttribute( "password", bcrypt.hashPassword( arguments.password ) );
 	}
 
+
+	/**
+	 * authentication methods
+	 */
 	public boolean function hasPermission( required string permission ){
 		return true;
 	}

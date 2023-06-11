@@ -11,7 +11,7 @@
     <table>
     <cfloop array="#prc.Users#" item="item">
         <tr>
-            <th>#item.getTitle()#</th>
+            <th>#item.getEmail()#</th>
             <td><a href="#event.buildLink( "users.#item.getID()#.edit" )#">Edit</a></td>
             <td><a href="#event.buildLink( "users.#item.getID()#" )#">View</a></td>
         <tr>

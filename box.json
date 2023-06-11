@@ -39,7 +39,8 @@
         "cbdebugger":"modules/cbdebugger/",
         "cbcsrf":"modules/cbcsrf/",
         "route-visualizer":"modules/route-visualizer/",
-        "cbmessagebox":"modules/cbmessagebox/"
+        "cbmessagebox":"modules/cbmessagebox/",
+        "mementifier":"modules/mementifier/"
     },
     "dependencies":{
         "coldbox":"7",
@@ -49,7 +50,8 @@
         "cbvalidation":"^4.3.0+24",
         "cbcsrf":"^3.1.0+16",
         "cbauth":"^6.0.1",
-        "cbmessagebox":"^4.0.0+58"
+        "cbmessagebox":"^4.0.0+58",
+        "mementifier":"^3.3.1+37"
     },
     "scripts":{
         "preVersion":"run-script format:check",

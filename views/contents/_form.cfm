@@ -15,9 +15,10 @@
         <label for="content">Content</label>
         <textarea type="text" class="form-control" name="content" id="content" rows="3" required>#prc.Content.getContent()#</textarea>
     </div>
-    <div class="form-group">
-        <label for="active">Active</label>
-        <input type="checkbox" class="form-control" name="active" id="active" <cfif prc.Content.isActive()>checked</cfif>>
+    <div class="form-check">
+        <input name="active" type="checkbox" class="form-check-input" id="active" <cfif prc.Content.isActive()>checked</cfif> />
+        <label for="active">Active:</label>
+        <!--- #view( "users/_validationmessage", { field: "active" } )# --->
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
     <input type="hidden" name="csrf" value="#csrfToken()#">

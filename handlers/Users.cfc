@@ -4,7 +4,7 @@ component extends="coldbox.system.EventHandler" secured {
 	 * list
 	 */
 	function index( event, rc, prc ){
-		prc.users = getInstance( "Content" ).get();
+		prc.users = getInstance( "User" ).get();
 		event.setView( "users/index" );
 	}
 
@@ -13,14 +13,46 @@ component extends="coldbox.system.EventHandler" secured {
 	 * edit form
 	 */
 	function edit( event, rc, prc ){
+		if ( !structKeyExists( rc, "UserViewModel" ) ) {
+			// UserViewModel could be passed back when validation fails so we can populate the form
+			var UserEntity   = getInstance( "User" ).findOrFail( rc.id );
+			rc.UserViewModel = populate( model = "UserViewModel", memento = UserEntity.getMemento() );
+		}
+		event.paramValue( "validationerrors", {} );
 		event.setView( "users/edit" );
+	}
+
+	/**
+	 * do update
+	 */
+	function update( event, rc, prc ){
+		var UserViewModel = populate( model = "UserViewModel", memento = rc );
+		var result        = validateModel(
+			target      = UserViewModel,
+			constraints = UserViewModel.contextConstraints( "update" )
+		);
+
+		if ( result.hasErrors() ) {
+			cbMessageBox().error( "Please review the #result.getErrorCount()# errors" );
+			back(
+				persistStruct = {
+					UserViewModel    : UserViewModel,
+					validationerrors : result.getAllErrorsAsStruct()
+				}
+			);
+			return;
+		}
+		getInstance( "User" ).findOrFail( rc.id ).update( UserViewModel.getMemento( profile = "persistance" ) );
+
+		relocate( "users" );
 	}
 
 	/**
 	 * new form
 	 */
 	function new( event, rc, prc ){
-		prc.user = getInstance( "User" );
+		// UserViewModel could be passed back when validation fails so we can populate the form
+		event.paramValue( "UserViewModel", getInstance( "UserViewModel" ) );
 		event.paramValue( "validationerrors", {} );
 		event.setView( "users/new" );
 	}
@@ -29,26 +61,33 @@ component extends="coldbox.system.EventHandler" secured {
 	 * do create
 	 **/
 	function create( event, rc, prc ){
-		var user = getInstance( "User" );
-		populate(
-			model   = user,
-			memento = {
-				"email"                : rc.email,
-				"password"             : rc.password,
-				"passwordConfirmation" : rc.passwordConfirmation
-			}
+		var UserViewModel = getInstance( "UserViewModel" );
+
+		populate( model = UserViewModel, memento = rc );
+		var result = validateModel(
+			target      = UserViewModel,
+			constraints = UserViewModel.contextConstraints( "create" )
 		);
-		var result = validateModel( target = user );
 
 		if ( result.hasErrors() ) {
 			cbMessageBox().error( "Please review the #result.getErrorCount()# errors" );
-			back( persistStruct = { validationerrors : result.getAllErrorsAsStruct() } );
+			back(
+				persistStruct = {
+					UserViewModel    : UserViewModel,
+					validationerrors : result.getAllErrorsAsStruct()
+				}
+			);
 			return;
 		}
 
-		var user = getInstance( "User" ).create( { "email" : rc.email, "password" : rc.password } );
+		getInstance( "entities.User" ).create( UserViewModel.getMemento( profile = "persistance" ) );
 
-		relocate( uri = flash.get( "_securedUrl", "/" ) );
+		relocate( "users" );
+	}
+
+	function show( event, rc, prc ){
+		prc.User = getInstance( "User" ).findOrFail( rc.id );
+		event.setView( "users/show" );
 	}
 
 }
