@@ -28,23 +28,6 @@
 <div class="row">
 	<div class="col-lg-9">
 
-		<section id="eventHandlers">
-		<div class="pb-2 mt-4 mb-2 border-bottom">
-			<h2>
-				Registered Event Handlers
-			</h2>
-		</div>
-		<p>
-			You can click on the following event handlers to execute their default action
-			<span class="badge badge-danger">index()</span>
-		</p>
-		<ul>
-			<cfloop list="#getSetting("RegisteredHandlers")#" index="handler">
-			<li><a href="#event.buildLink( handler )#">#handler#</a></li>
-			</cfloop>
-		</ul>
-		</section>
-
 		<cfif structCount( getSetting("Modules") )>
 			<section id="modules">
 			<div class="pb-2 mt-4 mb-2 border-bottom">
@@ -60,71 +43,6 @@
 			</ul>
 			</section>
 		</cfif>
-
-		<section id="test-harness">
-		<div class="pb-2 mt-4 mb-2">
-			<h2>
-				Application Test Harness
-			</h2>
-		</div>
-
-		<table class="table table-striped">
-			<thead>
-				<th>File/Folder</th>
-				<th>Description</th>
-			</thead>
-			<tbody>
-				<tr>
-					<td>
-						<em>specs</em>
-					</td>
-					<td>Where all your bdd, module, unit and integration tests go</td>
-				</tr>
-				<tr>
-					<td>
-						<em>results</em>
-					</td>
-					<td>Where automated test results go</td>
-				</tr>
-				<tr>
-					<td>
-						<em>resources</em>
-					</td>
-					<td>
-						Test resources like fixtures, itegrations, etc.
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<em>Application.cfc</em>
-					</td>
-					<td>A unique Application.cfc for your testing harness, please spice up as needed.</td>
-				</tr>
-				<tr>
-					<td>
-						<em>test.xml</em>
-					</td>
-					<td>A script for executing all application tests via TestBox ANT</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="#getSetting( "appMapping" )#/tests/runner.cfm">
-							#getSetting( "appMapping" )#runner.cfm
-						</a>
-					</td>
-					<td>A TestBox runner so you can execute your tests.</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="#getSetting( "appMapping" )#/tests/index.cfm">
-							#getSetting( "appMapping" )#index.cfm
-						</a>
-					</td>
-					<td>A TestBox browser, so you can browse and execute specs</td>
-				</tr>
-			</tbody>
-		</table>
-		</section>
 
 		<section id="urlActions">
 		<div class="pb-2 mt-4 mb-2 border-bottom">

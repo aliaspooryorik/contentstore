@@ -5,41 +5,41 @@ component {
 		// coldbox directives
 		coldbox = {
 			// Application Setup
-			appName : getSystemSetting( "APPNAME", "Your app name here" ),
-			eventName : "event",
+			appName                  : getSystemSetting( "APPNAME", "Your app name here" ),
+			eventName                : "event",
 			// Development Settings
-			reinitPassword : "",
-			handlersIndexAutoReload : false,
+			reinitPassword           : "",
+			handlersIndexAutoReload  : false,
 			// Implicit Events
-			defaultEvent : "",
-			requestStartHandler : "Main.onRequestStart",
-			requestEndHandler : "",
-			applicationStartHandler : "Main.onAppInit",
-			applicationEndHandler : "",
-			sessionStartHandler : "",
-			sessionEndHandler : "",
-			missingTemplateHandler : "",
+			defaultEvent             : "",
+			requestStartHandler      : "Main.onRequestStart",
+			requestEndHandler        : "",
+			applicationStartHandler  : "Main.onAppInit",
+			applicationEndHandler    : "",
+			sessionStartHandler      : "",
+			sessionEndHandler        : "",
+			missingTemplateHandler   : "",
 			// Extension Points
-			implicitViews : false,
-			applicationHelper : "includes/helpers/ApplicationHelper.cfm",
-			viewsHelper : "",
-			modulesExternalLocation : [],
-			viewsExternalLocation : "",
-			layoutsExternalLocation : "",
+			implicitViews            : false,
+			applicationHelper        : "includes/helpers/ApplicationHelper.cfm",
+			viewsHelper              : "",
+			modulesExternalLocation  : [],
+			viewsExternalLocation    : "",
+			layoutsExternalLocation  : "",
 			handlersExternalLocation : "",
-			requestContextDecorator : "",
-			controllerDecorator : "",
+			requestContextDecorator  : "",
+			controllerDecorator      : "",
 			// Error/Exception Handling
 			invalidHTTPMethodHandler : "",
-			exceptionHandler : "main.onException",
-			invalidEventHandler : "",
-			customErrorTemplate : "",
+			exceptionHandler         : "main.onException",
+			invalidEventHandler      : "",
+			customErrorTemplate      : "/coldbox/system/exceptions/Whoops.cfm",
 			// Application Aspects
-			handlerCaching : true,
-			eventCaching : false,
-			viewCaching : false,
+			handlerCaching           : true,
+			eventCaching             : false,
+			viewCaching              : false,
 			// Will automatically do a mapDirectory() on your `models` for you.
-			autoMapModels : true
+			autoMapModels            : true
 		};
 
 		// custom settings
@@ -63,9 +63,9 @@ component {
 			// Define Appenders
 			appenders : { coldboxTracer : { class : "coldbox.system.logging.appenders.ConsoleAppender" } },
 			// Root Logger
-			root : { levelmax : "INFO", appenders : "*" },
+			root      : { levelmax : "INFO", appenders : "*" },
 			// Implicit Level Categories
-			info : [ "coldbox.system" ]
+			info      : [ "coldbox.system" ]
 		};
 
 		// Layout Settings
@@ -80,30 +80,30 @@ component {
 
 		// module setting overrides
 		moduleSettings = {
-			"cbauth" : { "userServiceClass" : "User" },
+			"cbauth"     : { "userServiceClass" : "User" },
 			"cbsecurity" : {
 				"authentication" : {
-					"provider" : "AuthenticationService@cbauth",
-					"userService" : "User",
+					"provider"         : "AuthenticationService@cbauth",
+					"userService"      : "User",
 					"prcUserVariables" : "user"
 				},
 				"firewall" : {
-					"validator" : "AuthValidator@cbsecurity",
-					"invalidAuthenticationEvent" : "sessions.new",
+					"validator"                   : "AuthValidator@cbsecurity",
+					"invalidAuthenticationEvent"  : "sessions.new",
 					"defaultAuthenticationAction" : "redirect",
-					"invalidAuthorizationEvent" : "sessions.new",
-					"defaultAuthorizationAction" : "redirect"
+					"invalidAuthorizationEvent"   : "sessions.new",
+					"defaultAuthorizationAction"  : "redirect"
 				}
 			},
 			"cfmigrations" : {
 				"managers" : {
 					"default" : {
-						"manager" : "cfmigrations.models.QBMigrationManager",
+						"manager"             : "cfmigrations.models.QBMigrationManager",
 						"migrationsDirectory" : "resources/database/migrations/",
-						"properties" : {
+						"properties"          : {
 							"defaultGrammar" : "AutoDiscover@qb",
-							"schema" : getSystemSetting( "DB_SCHEMA" ),
-							"datasource" : getSystemSetting( "DB_DATABASE" )
+							"schema"         : getSystemSetting( "DB_SCHEMA" ),
+							"datasource"     : getSystemSetting( "DB_DATABASE" )
 						}
 					}
 				}
@@ -146,19 +146,19 @@ component {
 	 */
 	function development(){
 		coldbox.handlersIndexAutoReload = true;
-		coldbox.handlerCaching = false;
-		coldbox.customErrorTemplate = "/coldbox/system/exceptions/Whoops.cfm";
+		coldbox.handlerCaching          = false;
+		coldbox.customErrorTemplate     = "/coldbox/system/exceptions/Whoops.cfm";
 	}
 
 	function testing(){
 		modules.exclude.append( "verify-csrf-interceptor" );
 		moduleSettings.cfmigrations.managers[ "testing" ] = {
-			"manager" : "cfmigrations.models.QBMigrationManager",
+			"manager"             : "cfmigrations.models.QBMigrationManager",
 			"migrationsDirectory" : "/root/resources/database/migrations",
-			"properties" : {
+			"properties"          : {
 				"defaultGrammar" : "AutoDiscover@qb",
-				"schema" : getSystemSetting( "TEST_DB_SCHEMA" ),
-				"datasource" : getSystemSetting( "TEST_DB_DATABASE" )
+				"schema"         : getSystemSetting( "TEST_DB_SCHEMA" ),
+				"datasource"     : getSystemSetting( "TEST_DB_DATABASE" )
 			}
 		};
 	}
