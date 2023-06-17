@@ -41,7 +41,7 @@
 component {
 
 	// Module Properties
-	this.title              = "api";
+	this.title              = "v1";
 	this.author             = "";
 	this.webURL             = "";
 	this.description        = "";
@@ -51,17 +51,17 @@ component {
 	// If true, looks for layouts in the parent first, if not found, then in module. Else vice-versa
 	this.layoutParentLookup = true;
 	// Module Entry Point
-	this.entryPoint         = "api";
-	// Inherit Entry Point
-	this.inheritEntryPoint  = false;
+	this.entryPoint         = "v1";
+	// Inherit entry point from parent, so this will be /api/v1
+	this.inheritEntryPoint  = true;
 	// Model Namespace
-	this.modelNamespace     = "api";
+	this.modelNamespace     = "v1";
 	// CF Mapping
-	this.cfmapping          = "";
+	this.cfmapping          = "v1";
 	// Auto-map models
 	this.autoMapModels      = true;
 	// Module Dependencies
-	this.dependencies       = [];
+	this.dependencies       =   [];
 
 	/**
 	 * Configure the module

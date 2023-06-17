@@ -7,6 +7,7 @@ component{
 	function configure(){
 
 		route( "/", "Home.index" );
+		route( "/contentstore/:slug-regex:([a-zA-Z]+.+)" ).to( "contentstore.show" );
 
 	}
 
