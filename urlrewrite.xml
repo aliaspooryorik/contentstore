@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN" "http://tuckey.org/res/dtds/urlrewrite3.2.dtd">
+<urlrewrite>
+
+	<rule>
+		<note>Deny TRACE/TRACK HTTP Verb</note>
+		<condition type="method" casesensitive="false" operator="equal">TRACE|TRACK</condition>
+		<set type="status">403</set>
+		<to>null</to>
+	</rule>
+	<rule>
+		<note>Set default Content-Security-Policy request header</note>
+		<from>.*</from>
+		<set type="response-header" name="Content-Security-Policy">
+			worker-src 'self' blob:;
+			child-src 'self';
+			connect-src 'self' https://o91216.ingest.sentry.io/ https://*.google-analytics.com/ https://*.analytics.google.com/;
+			font-src 'self';
+			img-src 'self';
+			manifest-src 'self';
+			media-src 'self';
+			object-src 'self';
+			script-src 'self' 'unsafe-eval';
+			script-src-elem 'self' 'unsafe-inline';
+			script-src-attr 'self';
+			style-src 'self';
+			style-src-elem 'self' 'unsafe-inline';
+			style-src-attr 'self' 'unsafe-inline';
+			default-src 'none';
+			base-uri 'self';
+			navigate-to 'self';
+			form-action 'self';
+			frame-ancestors 'none';
+		</set>
+	</rule>
+	<rule>
+		<note>Set default Strict-Transport-Security request header</note>
+		<from>.*</from>
+		<set type="response-header" name="Strict-Transport-Security">max-age=31536000; includeSubDomains</set>
+	</rule>
+	<rule>
+		<note>Set default X-Frame-Options request header</note>
+		<from>.*</from>
+		<set type="response-header" name="X-Frame-Options">SAMEORIGIN</set>
+	</rule>
+	<rule>
+		<note>Set default X-XSS-Protection request header</note>
+		<from>.*</from>
+		<set type="response-header" name="X-XSS-Protection">1; mode=block</set>
+	</rule>
+	<rule>
+		<note>Set default Referrer-Policy request header</note>
+		<from>.*</from>
+		<set type="response-header" name="Referrer-Policy">strict-origin</set>
+	</rule>
+	<rule>
+		<note>Set default X-Content-Type-Options request header</note>
+		<from>.*</from>
+		<set type="response-header" name="X-Content-Type-Options">nosniff</set>
+	</rule>
+	<rule>
+		<note>Set default Feature-Policy request header</note>
+		<from>.*</from>
+		<set type="response-header" name="Feature-Policy">vibrate 'self'; sync-xhr 'self'</set>
+	</rule>
+	<rule>
+		<note>Set default Cache-Control request header - static assets</note>
+		<from>.*\.(js|css|jpg|png|gif|ico|svg|ttf|woff|woff2)$</from>
+		<set type="response-header" name="Cache-Control">public, max-age=31536000</set>
+	</rule>
+
+	<rule>
+		<note>Deny "hidden" files</note>
+		<condition type="request-uri" operator="equal">.*/\..*</condition>
+		<from>^/(.+)$</from>
+		<set type="status">404</set>
+		<to type="passthrough" last="true">/404.html</to>
+	</rule>
+
+	<rule>
+		<note>Deny common config files</note>
+		<condition type="request-uri" casesensitive="false" operator="equal">.*/(box.json|server.json|web.config|dev-urlRewrite.xml|ECS-urlRewrite.xml|ami-urlRewrite.cml|urlrewrite.xml|package.json|package-lock.json|Gulpfile.js|CFIDE/multiservermonitor-access-policy.xml|CFIDE/probe.cfm)</condition>
+		<from>^/(.+)$</from>
+		<set type="status">404</set>
+		<to type="passthrough" last="true">/404.html</to>
+	</rule>
+
+	<rule>
+		<note>ColdBox URLs</note>
+		<condition type="request-uri" operator="notequal">/(index.cfm|robots.txt|osd.xml|flex2gateway|cfide|cfformgateway|railo-context|lucee|admin-context|modules/contentbox-dsncreator|modules/contentbox-installer|modules/contentbox|files|images|js|javascripts|css|styles|config).*</condition>
+		<condition type="request-uri" operator="notequal">\.(bmp|gif|jpe?g|png|css|js|txt|xls|ico|swf|woff|ttf|otf)$</condition>
+		<condition type="request-filename" operator="notdir"/>
+		<condition type="request-filename" operator="notfile"/>
+		<from>^/(.+)$</from>
+		<to type="passthrough" last="true">/index.cfm/$1</to>
+	</rule>
+</urlrewrite>

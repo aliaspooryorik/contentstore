@@ -1,0 +1,44 @@
+{
+	"rule": [],
+	"excludes": [
+		{
+			"code": "MISSING_VAR"
+		},
+		{
+			"code": "FUNCTION_HINT_MISSING"
+		},
+		{
+			"code": "ARG_HINT_MISSING_SCRIPT"
+		},
+		{
+			"code": "ARG_VAR_CONFLICT"
+		},
+		{
+			"code": "UNQUOTED_STRUCT_KEY"
+		},
+		{
+			"code": "COMPONENT_HINT_MISSING"
+		},
+		{
+			"code": "VAR_TOO_LONG"
+		},
+		{
+			"code": "STRUCT_ARRAY_NOTATION"
+		},
+		{
+			"code": "VAR_IS_TEMPORARY"
+		},
+		{
+			"code": "VAR_TOO_WORDY"
+		},
+		{
+			"code": "COMPONENT_INVALID_NAME"
+		},
+		{
+			"code": "ARG_VAR_MIXED"
+		}
+	],
+	"includes": [],
+	"inheritParent": false,
+	"parameters": {}
+}

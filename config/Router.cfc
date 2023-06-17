@@ -1,6 +1,6 @@
 component {
 
-	function configure(){
+	void function configure(){
 		// Set Full Rewrites
 		setFullRewrites( true );
 		setExtensionDetection( false );
@@ -8,8 +8,8 @@ component {
 		route( "/login" ).withHandler( "sessions" ).toAction( { "GET" : "new", "POST" : "create" } );
 		route( "/logout", "sessions.delete" );
 
-		resources( resource = "registrations", only = [ "new", "create" ] );
-		resources( resource = "contents", parameterName = "contentId" );
+		resources( resource = "users", parameterName = "id" );
+		resources( resource = "contents", parameterName = "id" );
 
 		// Conventions based routing
 		route( ":handler/:action?" ).end();

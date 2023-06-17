@@ -1,14 +1,15 @@
 component {
 
-    function configure() {
-        return {
-            enableAutoVerifier: true,
-            enableAuthTokenRotator: true
-        };
-    }
+	struct function configure(){
+		return {
+			enableAutoVerifier     : false,
+			enableAuthTokenRotator : false,
+			rotationTimeout        : 60
+		};
+	}
 
-    function development( struct moduleSettings ) {
-        moduleSettings.verifyExcludes.append( "cbdebugger" );
-    }
+	void function development( required struct moduleSettings ){
+		moduleSettings.verifyExcludes.append( "^cbdebugger:" );
+	}
 
 }

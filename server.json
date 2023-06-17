@@ -3,9 +3,15 @@
         "cfengine":"lucee@5",
         "libDirs":"lib/"
     },
+    "JVM":{
+        "heapSize":"512"
+    },
     "web":{
         "rewrites":{
-            "enable":true
-        }
+            "config":"./urlrewrite.xml",
+            "enable":true,
+            "configReloadSeconds":30
+        },
+        "gzipEnable":true
     }
 }

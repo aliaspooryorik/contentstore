@@ -1,19 +1,6 @@
-# Quick with Auth Template
-
-Get started building a real application with Quick, cbauth, and cbguard
-
-## License
-Apache License, Version 2.0.
-
-## Important Links
-
-Source Code
-- https://github.com/coldbox-templates/advanced-script
-
 ## Quick Installation
 
-Each application templates contains a `box.json` so it can leverage [CommandBox](http://www.ortussolutions.com/products/commandbox) for its dependencies.
-Just go into each template directory and type:
+install Dependancies (ColdBox etc)
 
 ```
 box install
@@ -21,9 +8,26 @@ box install
 
 This will setup all the needed dependencies for each application template.
 
-Next, edit the `.env` file to have the correct settings for your server.
+Next, edit the `.env` file to have the correct settings for your server. For example:
 
-A migration is included for a `users` table.  Run it by typing `migrate up` in CommandBox.
+```
+DB_DATABASE=your_contentstore
+DB_SCHEMA=your_contentstore
+```
+
+Migrations are included for setting up tables etc if you don't have an existing database.
+
+Migrations can be run using `migrate up` in CommandBox.
+
+Note that if you haven't run migrations previously, you'll need to:
+
+```
+install commandbox-migrations
+migrate install
+```
+
+Database Connection details if you need them are in `.cfmigrations.json`
+
 
 You can then type:
 
@@ -33,7 +37,22 @@ box server start
 
 And run the application.
 
----
 
-###THE DAILY BREAD
- > "I am the way, and the truth, and the life; no one comes to the Father, but by me (JESUS)" Jn 14:1-12
+By default the application is secured but there are no users. You can create user in the database directly to get you started. For example for a user with the password of `Password123!`:
+
+```
+INSERT INTO `tblusers`
+(`username`, `email`, `firstname`, `lastname`, `password`, `active`)
+VALUES
+('newuser', 'new@user.com', 'New', 'User', '$2a$12$Lsdc4.gK3xPpbcN01rOW4.R18EQXqhNKb/EstymUbPH6tNWD9SxCm', 1);
+```
+
+Formatting
+
+Code should be formatted using the rules in `.cfformat.json`. These rules match the ColdBox framework standards.
+
+You can format code on-demand by running
+
+```
+cfformat watch
+```

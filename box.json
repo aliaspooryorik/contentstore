@@ -1,61 +1,44 @@
 {
-    "name":"Quick with Auth Template",
-    "version":"5.0.2",
-    "author":"You",
-    "location":"elpete/quick-with-auth#v5.0.2",
-    "slug":"cbtemplate-quick-with-auth",
-    "createPackageDirectory":false,
-    "type":"mvc",
-    "keywords":"",
-    "homepage":"",
-    "documentation":"",
-    "repository":{
-        "type":"",
-        "url":""
+    "devDependencies": {
+        "testbox": "^5.0.0",
+        "commandbox-dotenv": "*",
+        "commandbox-migrations": "*",
+        "commandbox-cfconfig": "*",
+        "commandbox-cfformat": "*",
+        "cfmigrations": "^4.0.0",
+        "cbdebugger": "^4.1.0",
+        "route-visualizer": "^2.0.0+6",
+        "cbPlaywright": "^1.33.1"
     },
-    "bugs":"",
-    "shortDescription":"",
-    "contributors":[],
-    "ignore":[],
-    "devDependencies":{
-        "testbox":"^5.0.0",
-        "commandbox-dotenv":"*",
-        "commandbox-migrations":"*",
-        "commandbox-cfconfig":"*",
-        "commandbox-cfformat":"*",
-        "cfmigrations":"^4.0.0",
-        "cbdebugger":"^4.1.0",
-        "route-visualizer":"^2.0.0+6"
+    "installPaths": {
+        "coldbox": "coldbox/",
+        "testbox": "testbox/",
+        "quick": "modules/quick/",
+        "cbauth": "modules/cbauth/",
+        "BCrypt": "modules/BCrypt/",
+        "cbvalidation": "modules/cbvalidation/",
+        "cfmigrations": "modules/cfmigrations/",
+        "cbsecurity": "modules/cbsecurity/",
+        "cbdebugger": "modules/cbdebugger/",
+        "cbcsrf": "modules/cbcsrf/",
+        "route-visualizer": "modules/route-visualizer/",
+        "cbmessagebox": "modules/cbmessagebox/",
+        "mementifier": "modules/mementifier/",
+        "cbPlaywright": "modules/cbPlaywright/"
     },
-    "installPaths":{
-        "coldbox":"coldbox/",
-        "testbox":"testbox/",
-        "quick":"modules/quick/",
-        "cbauth":"modules/cbauth/",
-        "cbguard":"modules/cbguard/",
-        "BCrypt":"modules/BCrypt/",
-        "cbvalidation":"modules/cbvalidation/",
-        "cfmigrations":"modules/cfmigrations/",
-        "cbsecurity":"modules/cbsecurity/",
-        "cbdebugger":"modules/cbdebugger/",
-        "cbcsrf":"modules/cbcsrf/",
-        "route-visualizer":"modules/route-visualizer/"
+    "dependencies": {
+        "coldbox": "7",
+        "quick": "^6.0.0",
+        "cbsecurity": "^3.3.0",
+        "BCrypt": "^3.0.0",
+        "cbvalidation": "^4.3.0+24",
+        "cbcsrf": "^3.1.0+16",
+        "cbauth": "^6.0.1",
+        "cbmessagebox": "^4.0.0+58",
+        "mementifier": "^3.3.1+37"
     },
-    "dependencies":{
-        "coldbox":"^7.0.0+7",
-        "quick":"^6.0.0",
-        "cbsecurity":"^3.3.0",
-        "BCrypt":"^3.0.0",
-        "cbvalidation":"^4.2.0",
-        "cbcsrf":"^3.1.0+16"
-    },
-    "scripts":{
-        "preVersion":"run-script format:check",
-        "postVersion":"package set location='elpete/quick-with-auth#v`package version`'",
-        "onRelease":"publish",
-        "postPublish":"!git push --follow-tags",
-        "postInstall":"pathExists .env || cp .env.example .env",
-        "format":"cfformat run config/**/*.cfc,handlers/**/*.cfc,includes/**/*.cfc,interceptors/**/*.cfc,layouts/**/*.cfc,models/**/*.cfc,modules_app/**/*.cfc,resources/**/*.cfc,tests/specs/**/*.cfc,views/**/*.cfc,*.cfc --overwrite",
-        "format:check":"cfformat check config/**/*.cfc,handlers/**/*.cfc,includes/**/*.cfc,interceptors/**/*.cfc,layouts/**/*.cfc,models/**/*.cfc,modules_app/**/*.cfc,resources/**/*.cfc,tests/specs/**/*.cfc,views/**/*.cfc,*.cfc"
+    "scripts": {
+        "format": "cfformat run config/**/*.cfc,handlers/**/*.cfc,includes/**/*.cfc,interceptors/**/*.cfc,layouts/**/*.cfc,models/**/*.cfc,modules_app/**/*.cfc,resources/**/*.cfc,tests/specs/**/*.cfc,views/**/*.cfc,*.cfc --overwrite",
+        "format:check": "cfformat check config/**/*.cfc,handlers/**/*.cfc,includes/**/*.cfc,interceptors/**/*.cfc,layouts/**/*.cfc,models/**/*.cfc,modules_app/**/*.cfc,resources/**/*.cfc,tests/specs/**/*.cfc,views/**/*.cfc,*.cfc"
     }
 }

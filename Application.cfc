@@ -6,24 +6,29 @@
 component {
 
 	// Application properties
-	this.name = hash( getCurrentTemplatePath() );
+	this.name              = hash( getCurrentTemplatePath() );
 	this.sessionManagement = true;
-	this.sessionTimeout = createTimespan( 0, 0, 30, 0 );
-	this.setClientCookies = true;
+	this.sessionTimeout    = createTimespan( 0, 0, 30, 0 );
+	this.setClientCookies  = true;
+
 
 	// Java Integration
-	this.javaSettings = { loadPaths : [ ".\lib" ], loadColdFusionClassPath : true, reloadOnChange : false };
+	this.javaSettings = {
+		loadPaths               : [ ".\lib" ],
+		loadColdFusionClassPath : true,
+		reloadOnChange          : false
+	};
 
 	this.datasource = getSystemSetting( "DB_DATABASE" );
 
 	// COLDBOX STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR COLDBOX APP
 	COLDBOX_APP_ROOT_PATH = getDirectoryFromPath( getCurrentTemplatePath() );
 	// The web server mapping to this application. Used for remote purposes or static purposes
-	COLDBOX_APP_MAPPING = "";
+	COLDBOX_APP_MAPPING   = "";
 	// COLDBOX PROPERTIES
-	COLDBOX_CONFIG_FILE = "";
+	COLDBOX_CONFIG_FILE   = "";
 	// COLDBOX APPLICATION KEY OVERRIDE
-	COLDBOX_APP_KEY = "";
+	COLDBOX_APP_KEY       = "";
 
 	this.mappings[ "/quick" ] = COLDBOX_APP_ROOT_PATH & "/modules/quick";
 
@@ -64,9 +69,9 @@ component {
 		return application.cbBootstrap.onMissingTemplate( argumentCollection = arguments );
 	}
 
-	function getSystemSetting( required string key, any defaultValue ){
+	private function getSystemSetting( required string key, any defaultValue ){
 		param variables.javaSystem = createObject( "java", "java.lang.System" );
-		var value = variables.javaSystem.getProperty( arguments.key );
+		var value                  = variables.javaSystem.getProperty( arguments.key );
 		if ( !isNull( local.value ) ) {
 			return value;
 		}
@@ -81,7 +86,7 @@ component {
 		}
 
 		throw(
-			type = "SystemSettingNotFound",
+			type    = "SystemSettingNotFound",
 			message = "Could not find a Java System property or Env setting with key [#arguments.key#]."
 		);
 	}
