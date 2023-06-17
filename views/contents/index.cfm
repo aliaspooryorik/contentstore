@@ -1,20 +1,35 @@
 <cfoutput>
-<h1>content.index</h1>
+	<h1>#prc.pageTitle#</h1>
 
-<a href="#event.buildLink( "contents.new" )#">New content</a>
+	<a href="#event.buildLink( "contents.new" )#" class="btn btn-primary">Create New Content</a>
 
-<cfif prc.Contents.isEmpty()>
+	#cbMessageBox().renderIt()#
 
-<cfelse>
-    <table>
-    <cfloop array="#prc.Contents#" item="item">
-        <tr>
-            <th>#item.getTitle()#</th>
-            <td><a href="#event.buildLink( "contents.#item.getID()#.edit" )#">Edit</a></td>
-            <td><a href="#event.buildLink( "contents.#item.getID()#" )#">View</a></td>
-        <tr>
-    </cfloop>
-    </table>
-</cfif>
+	<cfif prc.Contents.isEmpty()>
+		<p>There are no contents yet</p>
+	<cfelse>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Slug</th>
+					<th scope="col">Title</th>
+					<th scope="col">Active</th>
+					<th scope="col">Edit</th>
+					<th scope="col">View</th>
+				</tr>
+			</thead>
+			<tbody>
+			<cfloop array="#prc.Contents#" item="item">
+				<tr>
+					<td>#item.getSlug()#</td>
+					<td>#item.getTitle()#</td>
+					<td>#YesNoFormat( item.getActive() )#</td>
+					<td><a href="#event.buildLink( "contents.#item.getID()#.edit" )#">Edit</a></td>
+					<td><a href="#event.buildLink( "contents.#item.getID()#" )#">View</a></td>
+				<tr>
+			</cfloop>
+			</tbody>
+		</table>
+	</cfif>
 
-</cfoutput>
+	</cfoutput>

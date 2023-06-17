@@ -1,9 +1,17 @@
 component extends="coldbox.system.EventHandler" secured {
 
-	// Default Action
+	/**
+	 * Default page
+	 **/
 	function index( event, rc, prc ){
-		prc.welcomeMessage = "Welcome to ColdBox!";
 		event.setView( "main/index" );
+	}
+
+	function invalidEvent( event, rc, prc ){
+		event
+			.setView( "main/invalidevent" )
+			.setHTTPHeader( arguments.event.STATUS.NOT_FOUND, "Not Found" )
+			.noLayout();
 	}
 
 	/************************************** IMPLICIT ACTIONS *********************************************/
@@ -21,7 +29,7 @@ component extends="coldbox.system.EventHandler" secured {
 	}
 
 	function onSessionEnd( event, rc, prc ){
-		var sessionScope = event.getValue( "sessionReference" );
+		var sessionScope     = event.getValue( "sessionReference" );
 		var applicationScope = event.getValue( "applicationReference" );
 	}
 

@@ -1,40 +1,48 @@
-component {
+/**
+ * I handle login
+ **/
+component extends="coldbox.system.EventHandler" {
 
-	property name="auth" inject="AuthenticationService@cbauth";
-	property name="flash" inject="coldbox:flash";
-
+	/**
+	 * login form
+	 **/
 	function new( event, rc, prc ){
-		param rc._securedUrl = flash.get( "_securedUrl", "/" );
-		flash.put( "_securedUrl", rc._securedUrl );
-		param prc.errors = flash.get( "login_form_errors", {} );
+		prc.pageTitle = "Login";
 		event.setView( "sessions/new" );
 	}
 
+	/**
+	 * do login
+	 **/
 	function create( event, rc, prc ){
-		flash.keep( "_securedUrl" );
-
 		var result = validateModel(
-			target = rc,
-			constraints = { "email" : { "required" : true, "type" : "email" }, "password" : { "required" : true } }
+			target      = rc,
+			constraints = {
+				"username" : { "required" : true },
+				"password" : { "required" : true }
+			}
 		);
 
 		if ( result.hasErrors() ) {
-			flash.put( "login_form_errors", result.getAllErrorsAsStruct() );
+			cbMessageBox().error( result.getAllErrors() );
 			back();
 			return;
 		}
 
-		try{
-			auth.authenticate( rc.email, rc.password );
-			relocate( uri = flash.get( "_securedUrl", "/" ) );
+		try {
+			auth().authenticate( rc.username, rc.password );
+			relocate( uri = "/" );
 		} catch ( InvalidCredentials e ) {
-			flash.put( "login_form_errors", { "login" : "Invalid Credentials" } );
+			cbMessageBox().error( "Invalid Credentials" );
 			back();
 		}
 	}
 
+	/**
+	 * do logout
+	 **/
 	function delete( event, rc, prc ){
-		auth.logout();
+		auth().logout();
 		relocate( uri = "/" );
 	}
 
