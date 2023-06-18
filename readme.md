@@ -65,3 +65,5 @@ End to end tests require cbPlaywright to be set up with a target browser which y
 ```
 box playwright install chromium
 ```
+
+New tests can be created with the help of `box playwright codegen`

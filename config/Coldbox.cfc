@@ -87,13 +87,16 @@ component {
 	}
 
 	/**
-	 * Development environment
+	 * environment settings
 	 */
 	void function development(){
 		modules.exclude = [];
 		coldbox.handlersIndexAutoReload = true;
 		coldbox.handlerCaching = false;
 		coldbox.customErrorTemplate = "/coldbox/system/exceptions/Whoops.cfm";
+	}
+	void function testing(){
+		coldbox.customErrorTemplate = "/coldbox/system/exceptions/BugReport.cfm";
 	}
 
 }
