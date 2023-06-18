@@ -56,7 +56,7 @@ component extends="coldbox.system.EventHandler" secured {
 
 	/**
 	 * do create
-	 **/
+	 */
 	function create( event, rc, prc ){
 		var UserViewModel = getInstance( "UserViewModel" );
 
@@ -75,6 +75,18 @@ component extends="coldbox.system.EventHandler" secured {
 		relocate( "users" );
 	}
 
+	/**
+	 * do delete
+	 */
+	function delete( event, rc, prc ){
+		getInstance( "entities.User" ).findOrFail( rc.id ).delete();
+		cbMessageBox().success( "User deleted" );
+		relocate( "users" );
+	}
+
+	/**
+	 * view
+	 */
 	function show( event, rc, prc ){
 		prc.User = getInstance( "User" ).findOrFail( rc.id );
 		prc.pageTitle = prc.User.getUsername();

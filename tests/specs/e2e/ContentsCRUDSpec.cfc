@@ -1,29 +1,20 @@
-component extends="cbPlaywright.models.ColdBoxPlaywrightTestCase" {
+component extends="tests.resources.BasePlaywrightSpec" {
 
-	function beforeAll(){
-		super.beforeAll();
-		variables.browser = launchInteractiveBrowser( variables.playwright.chromium() );
-	}
-
-	function afterAll(){
-		super.afterAll();
-	}
+	this.interactiveBrowser = false;
 
 	function run(){
 		describe( "Contents Tests", function() {
 			beforeEach( function() {
-				variables.context = variables.browser.newContext();
-				variables.page = new PageDecorator( variables.context.newPage() );
-				doLogin();
+				setup();
 			} );
 			afterEach( function() {
-				variables.context.close();
+				teardown();
 			} );
 
-			it( "should create new content", function() {
+			it( "should support crud for content", function() {
+				// create
 				var slugTitle = "myslug-#getTickCount()#";
 				var pageTitle = "My Title #getTickCount()#";
-				page.navigate( route( "/contents" ) );
 
 				expect( page.title() ).toBe( "Contents" );
 
@@ -42,17 +33,35 @@ component extends="cbPlaywright.models.ColdBoxPlaywrightTestCase" {
 				page.getByLabel( "Slug" ).fill( "en/#slugTitle#" );
 				page.getByRole( "button", { name : "Submit" } ).click();
 
-				// page.pause();
 				expect( page.getByText( "New Content '#pageTitle#' created" ).count() ).toBe( 1 );
+
+				// edit
+				page.getByTestId( "row-1-edit-link" ).click();
+				page.getByLabel( "title" ).fill( "My Updated Title" );
+				page.getByRole( "button", { name: "Submit" } ).click();
+				expect( page.getByText( "Contents for 'My Updated Title' updated" ).count() ).toBe( 1 );
+				
+				// delete
+				expect( page.title() ).toBe( "Contents" );
+
+				//page.locator( "table tr:first-child td:nth-child(4) a" ).click();
+				page.getByTestId( "row-1-view-link" ).click();
+				page.getByRole( "button", { name: "Delete" } ).click();
+
+				expect( page.getByText( "Content deleted" ).count() ).toBe( 1 );
+
 			} );
+
 		} );
 	}
 
-	private function doLogin(){
+	private function setup(){
+		super.setup();
 		page.navigate( route( "/" ) );
 		page.getByLabel( "Username:" ).fill( "testuseraccount" );
 		page.getByLabel( "Password:" ).fill( "Password123!" );
 		page.getByRole( "button", { name : "Sign In" } ).click();
+		page.navigate( route( "/contents" ) );
 	}
 
 }

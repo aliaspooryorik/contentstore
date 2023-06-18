@@ -91,6 +91,7 @@ component {
 	 */
 	void function development(){
 		modules.exclude = [];
+		coldbox.invalidEventHandler = "";
 		coldbox.handlersIndexAutoReload = true;
 		coldbox.handlerCaching = false;
 		coldbox.customErrorTemplate = "/coldbox/system/exceptions/Whoops.cfm";

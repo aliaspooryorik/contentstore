@@ -25,7 +25,10 @@ component
 	this.memento = { neverInclude : [ "password" ] };
 
 	public User function setPassword( required string password ){
-		return assignAttribute( "password", bcrypt.hashPassword( arguments.password ) );
+		if ( arguments.password != "" ) { 
+			assignAttribute( "password", bcrypt.hashPassword( arguments.password ) );
+		}
+		return this;
 	}
 
 	public string function getFullname(){

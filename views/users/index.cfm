@@ -20,14 +20,14 @@
 				</tr>
 			</thead>
 			<tbody>
-			<cfloop array="#prc.Users#" item="item">
+			<cfloop array="#prc.Users#" item="item" index="i">
 				<tr>
 					<td>#item.getUsername()#</td>
 					<td>#item.getEmail()#</td>
 					<td>#item.getFullname()#</td>
 					<td>#YesNoFormat( item.getActive() )#</td>
-					<td><a href="#event.buildLink( "users.#item.getID()#.edit" )#">Edit</a></td>
-					<td><a href="#event.buildLink( "users.#item.getID()#" )#">View</a></td>
+					<td><a href="#event.buildLink( "users.#item.getID()#.edit" )#" data-testid="row-#i#-edit-link">Edit</a></td>
+					<td><a href="#event.buildLink( "users.#item.getID()#" )#" data-testid="row-#i#-view-link">View</a></td>
 				<tr>
 			</cfloop>
 			</tbody>

@@ -59,7 +59,7 @@ component extends="coldbox.system.EventHandler" secured {
 
 	/**
 	 * do create
-	 **/
+	 */
 	function create( event, rc, prc ){
 		var ContentViewModel = getInstance( "ContentViewModel" );
 
@@ -82,6 +82,18 @@ component extends="coldbox.system.EventHandler" secured {
 		relocate( "Contents" );
 	}
 
+	/**
+	 * do delete
+	 */
+	function delete( event, rc, prc ){
+		getInstance( "Content" ).findOrFail( rc.id ).delete();
+		cbMessageBox().success( "Content deleted" );
+		relocate( "Contents" );
+	}
+
+	/**
+	 * view
+	 */
 	function show( event, rc, prc ){
 		prc.Content = getInstance( "Content" ).findOrFail( rc.id );
 		prc.pageTitle = "Content Details";

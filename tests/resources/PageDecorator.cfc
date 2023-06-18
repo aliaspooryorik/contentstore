@@ -6,6 +6,10 @@ component {
 		variables._ariarole = createObject( "java", "com.microsoft.playwright.options.AriaRole" );
 	}
 
+	function click(){
+		return variables._page.click();
+	}
+
 	function navigate( required string uri ){
 		return variables._page.navigate( uri );
 	}
@@ -40,6 +44,14 @@ component {
 			return variables._page.getByText( text, ByRoleOptions );
 		}
 		return variables._page.getByText( text );
+	}
+
+	function getByTestId( required string testid ) {
+		return variables._page.getByTestId( testid );
+	}
+
+	function waitForLoadState( loadState, options ) {
+		return variables._page.waitForLoadState( loadState, options );
 	}
 
 	private function getAriaRole( required string ariarole ){
