@@ -4,7 +4,7 @@ component extends="coldbox.system.EventHandler" secured {
 	 * list
 	 */
 	function index( event, rc, prc ){
-		prc.Contents = getInstance( "Content" ).orderBy( "slug" ).get();
+		prc.contents = getInstance( "Content" ).orderBy( "slug" ).get();
 		prc.pageTitle = "Contents";
 		event.setView( "contents/index" );
 	}
@@ -34,14 +34,10 @@ component extends="coldbox.system.EventHandler" secured {
 		);
 
 		if ( result.hasErrors() ) {
+			flash.put( "ContentViewModel", ContentViewModel );
+			flash.put( "validationerrors", result.getAllErrorsAsStruct() );
 			cbMessageBox().error( "Please review the #result.getErrorCount()# errors" );
-			back(
-				persistStruct = {
-					ContentViewModel : ContentViewModel,
-					validationerrors : result.getAllErrorsAsStruct()
-				}
-			);
-			return;
+			return relocate( "contents.#rc.id#.edit" );
 		}
 		getInstance( "Content" ).findOrFail( rc.id ).update( ContentViewModel.getMemento( profile = "persistance" ) );
 
@@ -74,14 +70,10 @@ component extends="coldbox.system.EventHandler" secured {
 		);
 
 		if ( result.hasErrors() ) {
+			flash.put( "ContentViewModel", ContentViewModel );
+			flash.put( "validationerrors", result.getAllErrorsAsStruct() );
 			cbMessageBox().error( "Please review the #result.getErrorCount()# errors" );
-			back(
-				persistStruct = {
-					ContentViewModel : ContentViewModel,
-					validationerrors : result.getAllErrorsAsStruct()
-				}
-			);
-			return;
+			return relocate( "contents.new" );
 		}
 
 		getInstance( "entities.Content" ).create( ContentViewModel.getMemento( profile = "persistance" ) );
@@ -94,14 +86,6 @@ component extends="coldbox.system.EventHandler" secured {
 		prc.Content = getInstance( "Content" ).findOrFail( rc.id );
 		prc.pageTitle = "Content Details";
 		event.setView( "contents/show" );
-	}
-
-
-	function preHandler( event, rc, prc ){
-		writeDump( var = "preHandler", top = 2 )
-		writeDump( var = rc, top = 2 )
-		writeDump( var = prc, top = 2 )
-		abort;
 	}
 
 }
