@@ -10,8 +10,7 @@ component extends="coldbox.system.EventHandler" secured {
 	function invalidEvent( event, rc, prc ){
 		event
 			.setView( "main/invalidevent" )
-			.setHTTPHeader( arguments.event.STATUS.NOT_FOUND, "Not Found" )
-			.noLayout();
+			.setHTTPHeader( arguments.event.STATUS.NOT_FOUND, "Not Found" );
 	}
 
 	/************************************** IMPLICIT ACTIONS *********************************************/

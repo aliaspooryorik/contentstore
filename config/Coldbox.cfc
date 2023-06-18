@@ -5,41 +5,41 @@ component {
 		// coldbox directives
 		coldbox = {
 			// Application Setup
-			appName                  : getSystemSetting( "APPNAME", "ContentStore" ),
-			eventName                : "event",
+			appName : getSystemSetting( "APPNAME", "ContentStore" ),
+			eventName : "event",
 			// Development Settings
-			reinitPassword           : "",
-			handlersIndexAutoReload  : false,
+			reinitPassword : "",
+			handlersIndexAutoReload : false,
 			// Implicit Events
-			defaultEvent             : "",
-			requestStartHandler      : "Main.onRequestStart",
-			requestEndHandler        : "",
-			applicationStartHandler  : "Main.onAppInit",
-			applicationEndHandler    : "",
-			sessionStartHandler      : "",
-			sessionEndHandler        : "",
-			missingTemplateHandler   : "",
+			defaultEvent : "",
+			requestStartHandler : "Main.onRequestStart",
+			requestEndHandler : "",
+			applicationStartHandler : "Main.onAppInit",
+			applicationEndHandler : "",
+			sessionStartHandler : "",
+			sessionEndHandler : "",
+			missingTemplateHandler : "",
 			// Extension Points
-			implicitViews            : false,
-			applicationHelper        : "includes/helpers/ApplicationHelper.cfm",
-			viewsHelper              : "",
-			modulesExternalLocation  : [],
-			viewsExternalLocation    : "",
-			layoutsExternalLocation  : "",
+			implicitViews : false,
+			applicationHelper : "includes/helpers/ApplicationHelper.cfm",
+			viewsHelper : "",
+			modulesExternalLocation : [],
+			viewsExternalLocation : "",
+			layoutsExternalLocation : "",
 			handlersExternalLocation : "",
-			requestContextDecorator  : "",
-			controllerDecorator      : "",
+			requestContextDecorator : "",
+			controllerDecorator : "",
 			// Error/Exception Handling
 			invalidHTTPMethodHandler : "",
-			exceptionHandler         : "main.onException",
-			invalidEventHandler      : "main.invalidevent",
-			customErrorTemplate      : "",
+			exceptionHandler : "main.onException",
+			invalidEventHandler : "main.invalidevent",
+			customErrorTemplate : "",
 			// Application Aspects
-			handlerCaching           : true,
-			eventCaching             : false,
-			viewCaching              : false,
+			handlerCaching : true,
+			eventCaching : false,
+			viewCaching : false,
 			// Will automatically do a mapDirectory() on your `models` for you.
-			autoMapModels            : true
+			autoMapModels : true
 		};
 
 		// custom settings
@@ -68,9 +68,9 @@ component {
 			// Define Appenders
 			appenders : { coldboxTracer : { class : "coldbox.system.logging.appenders.ConsoleAppender" } },
 			// Root Logger
-			root      : { levelmax : "INFO", appenders : "*" },
+			root : { levelmax : "INFO", appenders : "*" },
 			// Implicit Level Categories
-			info      : [ "coldbox.system" ]
+			info : [ "coldbox.system" ]
 		};
 
 		// Layout Settings
@@ -87,13 +87,17 @@ component {
 	}
 
 	/**
-	 * Development environment
+	 * environment settings
 	 */
 	void function development(){
-		modules.exclude                 = [];
+		modules.exclude = [];
+		coldbox.invalidEventHandler = "";
 		coldbox.handlersIndexAutoReload = true;
-		coldbox.handlerCaching          = false;
-		coldbox.customErrorTemplate     = "/coldbox/system/exceptions/Whoops.cfm";
+		coldbox.handlerCaching = false;
+		coldbox.customErrorTemplate = "/coldbox/system/exceptions/Whoops.cfm";
+	}
+	void function testing(){
+		coldbox.customErrorTemplate = "/coldbox/system/exceptions/BugReport.cfm";
 	}
 
 }

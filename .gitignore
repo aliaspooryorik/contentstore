@@ -18,3 +18,6 @@ coldbox/*
 testbox/*
 modules/*
 **/apidocs/**
+/test-results/
+/playwright-report/
+/playwright/.cache/

@@ -4,7 +4,7 @@ component extends="coldbox.system.EventHandler" secured {
 	 * list
 	 */
 	function index( event, rc, prc ){
-		prc.Contents  = getInstance( "Content" ).orderBy( "slug" ).get();
+		prc.contents = getInstance( "Content" ).orderBy( "slug" ).get();
 		prc.pageTitle = "Contents";
 		event.setView( "contents/index" );
 	}
@@ -15,7 +15,7 @@ component extends="coldbox.system.EventHandler" secured {
 	function edit( event, rc, prc ){
 		if ( !structKeyExists( rc, "ContentViewModel" ) ) {
 			// ContentViewModel could be passed back when validation fails so we can populate the form
-			var ContentEntity   = getInstance( "Content" ).findOrFail( rc.id );
+			var ContentEntity = getInstance( "Content" ).findOrFail( rc.id );
 			rc.ContentViewModel = populate( model = "ContentViewModel", memento = ContentEntity.getMemento() );
 		}
 		event.paramValue( "validationerrors", {} );
@@ -28,24 +28,18 @@ component extends="coldbox.system.EventHandler" secured {
 	 */
 	function update( event, rc, prc ){
 		var ContentViewModel = populate( model = "ContentViewModel", memento = rc );
-		var result           = validateModel(
-			target      = ContentViewModel,
+		var result = validateModel(
+			target = ContentViewModel,
 			constraints = ContentViewModel.contextConstraints( "update" )
 		);
 
 		if ( result.hasErrors() ) {
+			flash.put( "ContentViewModel", ContentViewModel );
+			flash.put( "validationerrors", result.getAllErrorsAsStruct() );
 			cbMessageBox().error( "Please review the #result.getErrorCount()# errors" );
-			back(
-				persistStruct = {
-					ContentViewModel : ContentViewModel,
-					validationerrors : result.getAllErrorsAsStruct()
-				}
-			);
-			return;
+			return relocate( "contents.#rc.id#.edit" );
 		}
-		getInstance( "Content" )
-			.findOrFail( rc.id )
-			.update( ContentViewModel.getMemento( profile = "persistance" ) );
+		getInstance( "Content" ).findOrFail( rc.id ).update( ContentViewModel.getMemento( profile = "persistance" ) );
 
 		cbMessageBox().success( "Contents for '#ContentViewModel.getTitle()#' updated" );
 
@@ -65,25 +59,21 @@ component extends="coldbox.system.EventHandler" secured {
 
 	/**
 	 * do create
-	 **/
+	 */
 	function create( event, rc, prc ){
 		var ContentViewModel = getInstance( "ContentViewModel" );
 
 		populate( model = ContentViewModel, memento = rc );
 		var result = validateModel(
-			target      = ContentViewModel,
+			target = ContentViewModel,
 			constraints = ContentViewModel.contextConstraints( "create" )
 		);
 
 		if ( result.hasErrors() ) {
+			flash.put( "ContentViewModel", ContentViewModel );
+			flash.put( "validationerrors", result.getAllErrorsAsStruct() );
 			cbMessageBox().error( "Please review the #result.getErrorCount()# errors" );
-			back(
-				persistStruct = {
-					ContentViewModel : ContentViewModel,
-					validationerrors : result.getAllErrorsAsStruct()
-				}
-			);
-			return;
+			return relocate( "contents.new" );
 		}
 
 		getInstance( "entities.Content" ).create( ContentViewModel.getMemento( profile = "persistance" ) );
@@ -92,8 +82,20 @@ component extends="coldbox.system.EventHandler" secured {
 		relocate( "Contents" );
 	}
 
+	/**
+	 * do delete
+	 */
+	function delete( event, rc, prc ){
+		getInstance( "Content" ).findOrFail( rc.id ).delete();
+		cbMessageBox().success( "Content deleted" );
+		relocate( "Contents" );
+	}
+
+	/**
+	 * view
+	 */
 	function show( event, rc, prc ){
-		prc.Content   = getInstance( "Content" ).findOrFail( rc.id );
+		prc.Content = getInstance( "Content" ).findOrFail( rc.id );
 		prc.pageTitle = "Content Details";
 		event.setView( "contents/show" );
 	}

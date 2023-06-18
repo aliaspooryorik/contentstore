@@ -19,13 +19,13 @@
 				</tr>
 			</thead>
 			<tbody>
-			<cfloop array="#prc.Contents#" item="item">
+			<cfloop array="#prc.Contents#" item="item" index="i">
 				<tr>
 					<td>#item.getSlug()#</td>
 					<td>#item.getTitle()#</td>
 					<td>#YesNoFormat( item.getActive() )#</td>
-					<td><a href="#event.buildLink( "contents.#item.getID()#.edit" )#">Edit</a></td>
-					<td><a href="#event.buildLink( "contents.#item.getID()#" )#">View</a></td>
+					<td><a href="#event.buildLink( "contents.#item.getID()#.edit" )#" data-testid="row-#i#-edit-link">Edit</a></td>
+					<td><a href="#event.buildLink( "contents.#item.getID()#" )#" data-testid="row-#i#-view-link">View</a></td>
 				<tr>
 			</cfloop>
 			</tbody>
