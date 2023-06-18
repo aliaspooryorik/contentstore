@@ -4,7 +4,7 @@ component extends="coldbox.system.EventHandler" secured {
 	 * list
 	 */
 	function index( event, rc, prc ){
-		prc.Contents  = getInstance( "Content" ).orderBy( "slug" ).get();
+		prc.Contents = getInstance( "Content" ).orderBy( "slug" ).get();
 		prc.pageTitle = "Contents";
 		event.setView( "contents/index" );
 	}
@@ -15,7 +15,7 @@ component extends="coldbox.system.EventHandler" secured {
 	function edit( event, rc, prc ){
 		if ( !structKeyExists( rc, "ContentViewModel" ) ) {
 			// ContentViewModel could be passed back when validation fails so we can populate the form
-			var ContentEntity   = getInstance( "Content" ).findOrFail( rc.id );
+			var ContentEntity = getInstance( "Content" ).findOrFail( rc.id );
 			rc.ContentViewModel = populate( model = "ContentViewModel", memento = ContentEntity.getMemento() );
 		}
 		event.paramValue( "validationerrors", {} );
@@ -28,8 +28,8 @@ component extends="coldbox.system.EventHandler" secured {
 	 */
 	function update( event, rc, prc ){
 		var ContentViewModel = populate( model = "ContentViewModel", memento = rc );
-		var result           = validateModel(
-			target      = ContentViewModel,
+		var result = validateModel(
+			target = ContentViewModel,
 			constraints = ContentViewModel.contextConstraints( "update" )
 		);
 
@@ -43,9 +43,7 @@ component extends="coldbox.system.EventHandler" secured {
 			);
 			return;
 		}
-		getInstance( "Content" )
-			.findOrFail( rc.id )
-			.update( ContentViewModel.getMemento( profile = "persistance" ) );
+		getInstance( "Content" ).findOrFail( rc.id ).update( ContentViewModel.getMemento( profile = "persistance" ) );
 
 		cbMessageBox().success( "Contents for '#ContentViewModel.getTitle()#' updated" );
 
@@ -71,7 +69,7 @@ component extends="coldbox.system.EventHandler" secured {
 
 		populate( model = ContentViewModel, memento = rc );
 		var result = validateModel(
-			target      = ContentViewModel,
+			target = ContentViewModel,
 			constraints = ContentViewModel.contextConstraints( "create" )
 		);
 
@@ -93,9 +91,17 @@ component extends="coldbox.system.EventHandler" secured {
 	}
 
 	function show( event, rc, prc ){
-		prc.Content   = getInstance( "Content" ).findOrFail( rc.id );
+		prc.Content = getInstance( "Content" ).findOrFail( rc.id );
 		prc.pageTitle = "Content Details";
 		event.setView( "contents/show" );
+	}
+
+
+	function preHandler( event, rc, prc ){
+		writeDump( var = "preHandler", top = 2 )
+		writeDump( var = rc, top = 2 )
+		writeDump( var = prc, top = 2 )
+		abort;
 	}
 
 }

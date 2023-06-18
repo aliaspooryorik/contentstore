@@ -2,9 +2,10 @@
 	"default": {
 		"manager": "cfmigrations.models.QBMigrationManager",
 		"migrationsDirectory": "resources/database/migrations/",
+		"seedsDirectory": "resources/database/seeds",
 		"properties": {
-			"defaultGrammar": "AutoDiscover@qb",
-			"schema" : "${DB_SCHEMA}",
+			"defaultGrammar": "MySQLGrammar@qb",
+			"schema": "${DB_SCHEMA}",
 			"connectionInfo": {
 				"connectionString": "${DB_CONNECTIONSTRING}",
 				"class": "${DB_CLASS}",

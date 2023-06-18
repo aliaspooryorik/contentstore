@@ -18,6 +18,7 @@ component {
 	// Map back to its root
 	rootPath                         = reReplaceNoCase( this.mappings[ "/tests" ], "tests(\\|/)", "" );
 	this.mappings[ "/root" ]         = rootPath;
+	this.mappings[ "/cbvalidation" ] = rootPath & "modules/cbvalidation";
 	this.mappings[ "/cbPlaywright" ] = rootPath & "modules/cbPlaywright";
 	this.mappings[ "/coldbox" ]      = rootPath & "coldbox";
 

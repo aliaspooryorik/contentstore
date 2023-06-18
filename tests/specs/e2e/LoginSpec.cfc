@@ -4,26 +4,28 @@ component extends="cbPlaywright.models.ColdBoxPlaywrightTestCase" {
 		describe( "home page", () => {
 			it( "can visit the home page", () => {
 				var browser = launchInteractiveBrowser( variables.playwright.chromium() );
-				var page    = browser.newPage();
+				var page = browser.newPage();
 				navigate( page, route( "/" ) );
 				waitForLoadState( page );
 
 
 				expect( page.title() ).toBe( "Login" );
 
+				pause();
 
-				getByLabel( page, "Email Address:" ).click();
-				getByLabel( page, "Email Address:" ).fill( "john.whish@gmail.com" );
-				getByLabel( page, "Email Address:" ).press( "Tab" );
+
+				getByLabel( page, "Username:" ).click();
+				getByLabel( page, "Username:" ).fill( "john.whish@gmail.com" );
+				getByLabel( page, "Username:" ).press( "Tab" );
 				getByLabel( page, "Password:" ).fill( "ashaksdslkdfjslkdfj" );
-				getByRole( page, "button", { name : "Log In" } ).click();
-				getByLabel( page, "Email Address:" ).click();
-				getByLabel( page, "Email Address:" ).fill( "john.whish@gmail.cp" );
-				getByLabel( page, "Email Address:" ).press( "Tab" );
+				getByRole( page, "button", { name : "Sign In" } ).click();
+				getByLabel( page, "Username:" ).click();
+				getByLabel( page, "Username:" ).fill( "john.whish@gmail.cp" );
+				getByLabel( page, "Username:" ).press( "Tab" );
 				getByLabel( page, "Password:" ).press( "Shift+Tab" );
-				getByLabel( page, "Email Address:" ).press( "ArrowRight" );
-				getByLabel( page, "Email Address:" ).fill( "john.whish@gmail.com" );
-				getByLabel( page, "Email Address:" ).press( "Tab" );
+				getByLabel( page, "Username:" ).press( "ArrowRight" );
+				getByLabel( page, "Username:" ).fill( "john.whish@gmail.com" );
+				getByLabel( page, "Username:" ).press( "Tab" );
 				getByLabel( page, "Password:" ).fill( "abc" );
 				getByRole( page, "button", { name : "Log In" } ).click();
 				getByRole( page, "link", { name : "Users" } ).click();

@@ -22,12 +22,13 @@ Migrations can be run using `migrate up` in CommandBox.
 Note that if you haven't run migrations previously, you'll need to:
 
 ```
-install commandbox-migrations
-migrate install
+box install commandbox-migrations
+box migrate install
+box migrate up
+box migrate seed run
 ```
 
 Database Connection details if you need them are in `.cfmigrations.json`
-
 
 You can then type:
 
@@ -38,16 +39,14 @@ box server start
 And run the application.
 
 
-By default the application is secured but there are no users. You can create user in the database directly to get you started. For example for a user with the password of `Password123!`:
+If you used cfmigration to install the seed then you'll have a default user of `testuseraccount` / `Password123!`
 
-```
-INSERT INTO `tblusers`
-(`username`, `email`, `firstname`, `lastname`, `password`, `active`)
-VALUES
-('newuser', 'new@user.com', 'New', 'User', '$2a$12$Lsdc4.gK3xPpbcN01rOW4.R18EQXqhNKb/EstymUbPH6tNWD9SxCm', 1);
-```
 
-Formatting
+## Lucee
+
+Lucee admin is a `/lucee/admin/server.cfm`
+
+## Formatting
 
 Code should be formatted using the rules in `.cfformat.json`. These rules match the ColdBox framework standards.
 
@@ -55,4 +54,14 @@ You can format code on-demand by running
 
 ```
 cfformat watch
+```
+
+## Tests
+
+tests are included in the `/tests/` folder.
+
+End to end tests require cbPlaywright to be set up with a target browser which you can install using:
+
+```
+box playwright install chromium
 ```
